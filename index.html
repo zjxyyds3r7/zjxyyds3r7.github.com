@@ -1,7 +1,8 @@
 <button onclick="getQueryStringArgs()">
     点击
 </button>
-
+<label id="tianapi_data"></label>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
     function getQueryStringArgs(){ 
         //取得查询字符串并去掉开头的问号
@@ -28,4 +29,18 @@
         console.log(args);
         return args; 
     } 
+
+    $(document).ready(function(){
+
+    $.post('https://apis.tianapi.com/chengyujielong/index',
+    {
+       key:'e4f14dc0f0b162bb745cc20833dce4f0',word:'一马当先',userid:'98105401289c18d858c169578ecf0125'
+    },
+    function(data,status){
+		console.log(data);
+		$('#tianapi_data').append(JSON.stringify(data)); //返回内容绑定到id为tianapi_data标签上
+        alert('状态码：' + data.code + '\n消息：' + data.msg);
+    });
+
+});
 </script>
